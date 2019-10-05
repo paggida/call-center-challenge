@@ -1,8 +1,7 @@
+const func = require('../functions/delegateFunctions');
+
 module.exports = {
   delegateCall(req, res) {
-    const { type } = req.body;
-    return res.json({
-      message: `Evento recebido: ${type}`
-    });
+    return res.json(func.getStatusCall(req.body));
   }
 };
