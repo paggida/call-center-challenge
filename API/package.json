@@ -1,0 +1,25 @@
+{
+  "name": "call_center_challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test-Linux": "export NODE_ENV=test jest",
+    "test-windows": "set NODE_ENV=test && jest",
+    "test": "jest"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "youch": "^2.0.10"
+  },
+  "devDependencies": {
+    "dotenv-safe": "^6.1.0",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.3"
+  }
+}
