@@ -1,4 +1,4 @@
 {
-  "phone": "Primary Key",
+  "id": "Primary Key - Phone number",
   "status": "Call's status"
 }
