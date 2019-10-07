@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.js",
-    "test-Linux": "export NODE_ENV=test jest",
+    "test-linux": "export NODE_ENV=test jest",
     "test-windows": "set NODE_ENV=test && jest",
     "test": "jest"
   },
