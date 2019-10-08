@@ -47,14 +47,14 @@ describe('Update function validation', () => {
   });
   it('should not be able to update a inexistent record', async () => {
     const response = await db.update(
-      { id: 11111111, type: 'call.waiting', typeRating: 3 },
+      { id: 11111111, type: 'call.standby', typeRating: 2 },
       'TB_CUSTOMERS'
     );
     expect(response.status).toBe(4);
   });
   it('should be able to update a valid record', async () => {
     const response = await db.update(
-      { id: 99999999, type: 'call.waiting', typeRating: 3 },
+      { id: 99999999, type: 'call.standby', typeRating: 2 },
       'TB_CUSTOMERS'
     );
     expect(response.status).toBe(0);
@@ -65,8 +65,8 @@ describe('Find by id validation', () => {
   it('should be able to find an existing record', async () => {
     const response = await db.findById(99999999, 'TB_CUSTOMERS');
     expect(response.id).toBe(99999999);
-    expect(response.type).toBe('call.waiting');
-    expect(response.typeRating).toBe(3);
+    expect(response.type).toBe('call.standby');
+    expect(response.typeRating).toBe(2);
   });
   it('should not be able to find an inexisting record', async () => {
     const response = await db.findById(11111111, 'TB_CUSTOMERS');

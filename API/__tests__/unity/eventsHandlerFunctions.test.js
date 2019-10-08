@@ -42,6 +42,19 @@ describe('Event ranking function validation', () => {
     const response = eventsHandlerFunc.rankingEventsType(waitingObject);
     expect(response).toHaveProperty('typeRating', 3);
   });
+  it('Should be able to get code corresponds to life cycle step named actor.entered', () => {
+    const enteredObject = {
+      type: 'actor.entered',
+      call_id: '1463669263.30033',
+      code: '123456',
+      actor: 'user.name@email.com',
+      number: '200',
+      queue: '900',
+      timestamp: '2017-01-01T00:00:00Z'
+    };
+    const response = eventsHandlerFunc.rankingEventsType(enteredObject);
+    expect(response).toHaveProperty('typeRating', 4);
+  });
   it('Should be able to get code corresponds to life cycle step named call.ongoing', () => {
     const ongoingObject = {
       type: 'call.ongoing',
@@ -53,32 +66,19 @@ describe('Event ranking function validation', () => {
       timestamp: '2017-01-01T00:00:00Z'
     };
     const response = eventsHandlerFunc.rankingEventsType(ongoingObject);
-    expect(response).toHaveProperty('typeRating', 4);
-  });
-  it('Should be able to get code corresponds to life cycle step named call.overflow', () => {
-    const overflowObject = {
-      type: 'call.overflow',
-      call_id: '1463669263.30033',
-      code: '123456',
-      direction: 'inbound',
-      destination: '910',
-      our_number: '0800000000',
-      their_number: '11991910000',
-      timestamp: '2017-01-01T00:00:00Z'
-    };
-    const response = eventsHandlerFunc.rankingEventsType(overflowObject);
     expect(response).toHaveProperty('typeRating', 5);
   });
-  it('Should be able to get code corresponds to life cycle step named call.follow-me', () => {
-    const followmeObject = {
-      type: 'call.follow-me',
+  it('Should be able to get code corresponds to life cycle step named actor.left', () => {
+    const leftObject = {
+      type: 'actor.left',
       call_id: '1463669263.30033',
-      direction: 'inbound',
-      our_number: '0800000000',
-      their_number: '11991910000',
+      code: '123456',
+      actor: 'user.name@email.com',
+      number: '200',
+      queue: '900',
       timestamp: '2017-01-01T00:00:00Z'
     };
-    const response = eventsHandlerFunc.rankingEventsType(followmeObject);
+    const response = eventsHandlerFunc.rankingEventsType(leftObject);
     expect(response).toHaveProperty('typeRating', 6);
   });
   it('Should be able to get code corresponds to life cycle step named call.finished', () => {
@@ -95,15 +95,17 @@ describe('Event ranking function validation', () => {
     expect(response).toHaveProperty('typeRating', 7);
   });
   it('Should be able to get the default code corresponds to life cycle step with an unknown step name', () => {
-    const recordingAvailableObject = {
-      type: 'call.recording-available',
+    const overflowObject = {
+      type: 'call.overflow',
       call_id: '1463669263.30033',
-      url: 'https://api.teravoz.com.br/recording/1463669263.30033.wav',
+      code: '123456',
+      direction: 'inbound',
+      destination: '910',
+      our_number: '0800000000',
+      their_number: '11991910000',
       timestamp: '2017-01-01T00:00:00Z'
     };
-    const response = eventsHandlerFunc.rankingEventsType(
-      recordingAvailableObject
-    );
+    const response = eventsHandlerFunc.rankingEventsType(overflowObject);
     expect(response).toHaveProperty('typeRating', 0);
   });
 });
