@@ -1,4 +1,5 @@
 {
   "id": "Primary Key - Phone number",
-  "status": "Call's status"
+  "type": "Call's status",
+  "typeRating": "Order code in life cycle"
 }

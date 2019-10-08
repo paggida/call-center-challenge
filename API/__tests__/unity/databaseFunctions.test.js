@@ -3,7 +3,7 @@ const db = require('../../src/app/functions/databaseFunctions');
 describe('Insert function validation', () => {
   it('should not be able to insert record in an inexisting table', async () => {
     const response = await db.insert(
-      { id: 99999999, status: 'call.new' },
+      { id: 99999999, type: 'call.new', typeRating: 1 },
       'TB_X'
     );
     expect(response.status).toBe(1);
@@ -16,14 +16,14 @@ describe('Insert function validation', () => {
   });
   it('should be able to insert a valid record', async () => {
     const response = await db.insert(
-      { id: 99999999, status: 'call.new' },
+      { id: 99999999, type: 'call.new', typeRating: 1 },
       'TB_CUSTOMERS'
     );
     expect(response.status).toBe(0);
   });
   it('should not be able to insert an id with duplicity', async () => {
     const response = await db.insert(
-      { id: 99999999, status: 'call.new' },
+      { id: 99999999, type: 'call.new', typeRating: 1 },
       'TB_CUSTOMERS'
     );
     expect(response.status).toBe(3);
@@ -34,7 +34,7 @@ describe('Insert function validation', () => {
 describe('Update function validation', () => {
   it('should not be able to update record in a inexisting table', async () => {
     const response = await db.update(
-      { id: 99999999, status: 'call.new' },
+      { id: 99999999, type: 'call.new', typeRating: 1 },
       'TB_X'
     );
     expect(response.status).toBe(1);
@@ -47,14 +47,14 @@ describe('Update function validation', () => {
   });
   it('should not be able to update a inexistent record', async () => {
     const response = await db.update(
-      { id: 11111111, status: 'call.waiting' },
+      { id: 11111111, type: 'call.waiting', typeRating: 3 },
       'TB_CUSTOMERS'
     );
     expect(response.status).toBe(4);
   });
   it('should be able to update a valid record', async () => {
     const response = await db.update(
-      { id: 99999999, status: 'call.waiting' },
+      { id: 99999999, type: 'call.waiting', typeRating: 3 },
       'TB_CUSTOMERS'
     );
     expect(response.status).toBe(0);
@@ -65,7 +65,8 @@ describe('Find by id validation', () => {
   it('should be able to find an existing record', async () => {
     const response = await db.findById(99999999, 'TB_CUSTOMERS');
     expect(response.id).toBe(99999999);
-    expect(response.status).toBe('call.waiting');
+    expect(response.type).toBe('call.waiting');
+    expect(response.typeRating).toBe(3);
   });
   it('should not be able to find an inexisting record', async () => {
     const response = await db.findById(11111111, 'TB_CUSTOMERS');
