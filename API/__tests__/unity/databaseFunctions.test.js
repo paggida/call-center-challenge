@@ -1,7 +1,7 @@
 const db = require('../../src/app/functions/databaseFunctions');
 
 describe('Insert function validation', () => {
-  it('should not be able to insert record in a inexisting table', async () => {
+  it('should not be able to insert record in an inexisting table', async () => {
     const response = await db.insert(
       { id: 99999999, status: 'call.new' },
       'TB_X'
