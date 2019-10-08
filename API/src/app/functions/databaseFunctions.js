@@ -103,13 +103,6 @@ _openJsonFile = async file =>
     .then(content => JSON.parse(content))
     .catch(() => '');
 
-/* return new Promise((resolve, reject) => {
-    fileReader.readFile(file, (err, data) => {
-      if (err) resolve({});
-      resolve(JSON.parse(data));
-    });
-  }); */
-
 _isExistFile = async file =>
   await promisify(fileReader.stat)(file)
     .then(() => true)
