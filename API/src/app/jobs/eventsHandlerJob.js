@@ -1,6 +1,5 @@
 const func = require('../functions/eventsHandlerFunctions');
-//----------Status constants------------
-const STANDBY_CALL_STATUS = 2;
+const constant = require('../config/constants');
 
 class EventsHandler {
   get key() {
@@ -10,8 +9,8 @@ class EventsHandler {
   async handle(job, done) {
     const { their_number: id, type, typeRating, call_id: idCall } = job.data;
     const response =
-      typeRating === STANDBY_CALL_STATUS
-        ? func.redirectCall(idCall)
+      typeRating === constant.STANDBY_CALL_STATUS
+        ? func.redirectCall(idCall, id, type, typeRating)
         : func.registerCallEvent(id, type, typeRating);
     func.handleResponseExceptions(id, type, response);
     return done();
