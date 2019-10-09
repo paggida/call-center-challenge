@@ -1,3 +1,7 @@
+const db = require('../functions/databaseFunctions');
+const apiWrapper = require('../services/apiWrapper');
+const constant = require('../config/constants');
+
 module.exports = {
   rankingEventsType(eventObject) {
     const { type } = eventObject;
@@ -19,6 +23,44 @@ module.exports = {
       default:
         return _addRankingAttribute(eventObject, 0);
     }
+  },
+  async getCorrectBranch(id) {
+    const { isFirstContact } = await db.findById(id, constant.TABLE_CUSTOMERS);
+    return isFirstContact
+      ? constant.FIRST_CONTACT_BRANCH
+      : constant.COMMON_CONTACT_BRANCH;
+  },
+  async redirectCall(idCall, id, type, typeRating) {
+    const destination = await this.getCorrectBranch(id);
+
+    await db.update(
+      { id, type, typeRating, isFirstContact: false },
+      constant.TABLE_CUSTOMERS
+    );
+
+    return apiWrapper.post('/actions', {
+      type: 'delegate',
+      call_id: idCall,
+      destination
+    });
+  },
+  async registerCallEvent(id, type, typeRating) {
+    return !(await db.findById(id, constant.TABLE_CUSTOMERS))
+      ? await db.insert(
+          { id, type, typeRating, isFirstContact: true },
+          constant.TABLE_CUSTOMERS
+        )
+      : await db.update(
+          { id, type, typeRating, isFirstContact: false },
+          constant.TABLE_CUSTOMERS
+        );
+  },
+  async handleResponseExceptions(id, type, { status, message }) {
+    if (status)
+      await db.insert(
+        { id, type, message, date: new Date() },
+        constant.TABLE_ERROR_LOG
+      );
   }
 };
 
