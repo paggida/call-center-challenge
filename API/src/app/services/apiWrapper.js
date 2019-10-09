@@ -1,4 +1,5 @@
 const api = require('../services/api');
+const error = require('../Exceptions/apiExceptions');
 
 module.exports = {
   post(url, body = {}) {
@@ -7,18 +8,11 @@ module.exports = {
       if (process.env.URL_TERAVOZ) {
         api
           .post(`${process.env.URL_TERAVOZ}/${url}`, body)
-          .then(response => resolve(response))
-          .catch(error => reject(error));
+          .then(() => resolve({ status: 0 }))
+          .catch(errorObject => reject(error.throwException(errorObject)));
       } else {
         //... Otherwise, it'll simulates api response
-        resolve({
-          status: 200,
-          statusText: 'OK',
-          headers: {},
-          config: {},
-          request: {},
-          data: {}
-        });
+        resolve({ status: 0 });
       }
     });
   }

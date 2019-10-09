@@ -1,5 +1,6 @@
 {
   "id": "Primary Key - Phone number",
   "type": "Call's status",
-  "typeRating": "Order code in life cycle"
+  "typeRating": "Order code in life cycle",
+  "isFirstContact": "First contact flag"
 }
