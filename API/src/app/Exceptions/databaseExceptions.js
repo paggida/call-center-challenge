@@ -14,7 +14,7 @@ module.exports = {
         type: 'DB'
       };
     } else {
-      return { status: errorCode, message: 'Unknown error code' };
+      return { status: errorCode, message: 'Unknown error code', type: 'DB' };
     }
   }
 };
