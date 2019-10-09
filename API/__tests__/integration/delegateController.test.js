@@ -1,12 +1,15 @@
-const db = require('../../src/app/functions/databaseFunctions');
-const constant = require('../../src/app/config/constants');
 const request = require('supertest');
 const app = require('../../src/server');
 
+jest.mock('../../src/app/services/callsQueue', () => ({
+  create: jest.fn(() => ({
+    attempts: jest.fn(() => ({
+      save: jest.fn()
+    }))
+  }))
+}));
+
 describe('Validation to endpoint "/webhook"', () => {
-  afterAll(async () => {
-    console.log(await db.delete(99999999, constant.TABLE_CUSTOMERS));
-  });
   it('Should be able to send a new event', async () => {
     const response = await request(app)
       .post('/webhook')
