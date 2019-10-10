@@ -1,3 +1,5 @@
+const constant = require('../config/constants');
+const db = require('../functions/databaseFunctions');
 const callsQueue = require('../services/callsQueue');
 const eventsHandlerJob = require('../jobs/eventsHandlerJob');
 const eventsHandlerFunc = require('../functions/eventsHandlerFunctions');
@@ -13,5 +15,9 @@ module.exports = {
       .attempts(process.env.NUMBER_ATTEMPTS_JOBS || 3)
       .save();
     return res.json({ message: `Event received!` });
+  },
+  async getlistActiveCalls(req, res) {
+    const list = await db.listActiveCalls(constant.TABLE_CUSTOMERS);
+    return res.json({ list });
   }
 };

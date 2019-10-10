@@ -29,3 +29,13 @@ describe('Validation to endpoint "/webhook"', () => {
     expect(response.body.message).toBe('Event received!');
   });
 });
+
+describe('Validation to endpoint "/activecalls"', () => {
+  it('Should be able to list all the active calls', async () => {
+    const {
+      body: { list }
+    } = await request(app).get('/activecalls');
+    const inactiveCalls = list.filter(calls => calls.type === 'call.finished');
+    expect(inactiveCalls.length).toBe(0);
+  });
+});
