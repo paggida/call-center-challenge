@@ -1,8 +1,9 @@
-const eventsHandlerFunc = require('../functions/eventsHandlerFunctions');
-const eventsHandlerJob = require('../jobs/eventsHandlerJob');
 const callsQueue = require('../services/callsQueue');
+const eventsHandlerJob = require('../jobs/eventsHandlerJob');
+const eventsHandlerFunc = require('../functions/eventsHandlerFunctions');
 
 module.exports = {
+  // Receives the event and adds it to the queue
   async eventsReceiver(req, res) {
     callsQueue
       .create(

@@ -1,6 +1,6 @@
+const constant = require('../config/constants');
 const db = require('../functions/databaseFunctions');
 const apiWrapper = require('../services/apiWrapper');
-const constant = require('../config/constants');
 
 module.exports = {
   rankingEventsType(eventObject) {

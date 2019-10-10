@@ -1,15 +1,17 @@
-const express = require("express");
-const cors = require("cors");
-const youch = require("youch");
+const express = require('express');
+const cors = require('cors');
+const youch = require('youch');
 
 class App {
   constructor() {
     this.express = express();
 
-    if (process.env.NODE_ENV === "development") {
-      require("dotenv-safe").config({ allowEmptyValues: true });
+    /* Set environment variables with validation (Development)
+       or read only (Production and Test)*/
+    if (process.env.NODE_ENV === 'development') {
+      require('dotenv-safe').config({ allowEmptyValues: true });
     } else {
-      require("dotenv").config();
+      require('dotenv').config();
     }
 
     this.middlewares();
@@ -24,20 +26,22 @@ class App {
   }
 
   security() {
-    this.express.disable("x-powered-by");
-    this.express.disable("etag");
+    this.express.disable('x-powered-by');
+    this.express.disable('etag');
   }
   routes() {
-    this.express.use(require("./routes"));
+    this.express.use(require('./routes'));
   }
   exception() {
+    /* In production returns standard error, in other environments
+       returns errors treated in JSON format.*/
     this.express.use(async (err, req, res, next) => {
-      if (process.env.NODE_ENV !== "production") {
+      if (process.env.NODE_ENV !== 'production') {
         const errYouch = new youch(err, req);
         return res.json(await errYouch.toJSON());
       }
       return res.status(err.status || 500).json({
-        message: "Internal server error, please try again later"
+        message: 'Internal server error, please try again later'
       });
     });
   }

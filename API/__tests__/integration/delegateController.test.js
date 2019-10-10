@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('../../src/server');
 
+//Mock the queue comportment
 jest.mock('../../src/app/services/callsQueue', () => ({
   create: jest.fn(() => ({
     attempts: jest.fn(() => ({

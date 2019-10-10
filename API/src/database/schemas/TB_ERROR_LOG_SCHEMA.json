@@ -1,5 +1,5 @@
 {
-  "id": "FK - Phone number",
+  "id": "Foreign key - Phone number",
   "type": "Call's status during error",
   "message": "Error object",
   "date": "Error date and time"
