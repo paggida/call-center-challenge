@@ -1,10 +1,16 @@
 import React, { Fragment, Component } from 'react';
 import Header from '../../components/Header';
 import CallList from '../../components/CallList';
+import api from '../../services/api'
 
 class Home extends Component {
   componentDidMount() {
-    //const { requestNameUser, nameUser } = this.props;
+    this.getAllActiveCalls()
+  }
+
+  getAllActiveCalls=()=>{
+    //Chama a API
+    console.log('Chama a API')
   }
 
   /* return (
@@ -16,7 +22,9 @@ class Home extends Component {
 
   render() {
     return (
-      <Fragment />
+      <Fragment>
+        <Header />
+      </Fragment>
     );
   }
 }
