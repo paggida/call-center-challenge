@@ -21,8 +21,12 @@ class Home extends Component {
     const {data} = this.state
     return (
       <Fragment>
+<<<<<<< HEAD
         <Header funcRefreshList={this.getAllActiveCalls}/>
         <CallList activeCalls={data} />
+=======
+        <Header />
+>>>>>>> ab1d16d7813dfa09b2a8e9b0cba2ab9a1ae58687
       </Fragment>
     );
   }

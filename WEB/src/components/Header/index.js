@@ -14,8 +14,11 @@ const Call = ({funcRefreshList}) => (
   </Container>
 );
 
+<<<<<<< HEAD
 Call.propTypes = {
   funcRefreshList: PropTypes.func.isRequired,
 };
 
+=======
+>>>>>>> ab1d16d7813dfa09b2a8e9b0cba2ab9a1ae58687
 export default Call;
