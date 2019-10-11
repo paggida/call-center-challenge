@@ -1,25 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Container} from './styles';
+import {Container, Title} from './styles';
+import RefreshButton from '../RefreshButton'
+import logo from '../../assets/img/logo.png';
 
-
-const Call = ({}) => (
-  <Container/>
+const Call = ({funcRefreshList}) => (
+  <Container>
+    <Title>
+    <img src={logo} alt="Teravoz" />
+    <h2>Visualizador de chamadas</h2>
+    <RefreshButton onClick={funcRefreshList}/>
+    </Title>
+  </Container>
 );
 
-/*InputText.propTypes = {
-  type: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func,
-  enterFunc: PropTypes.func,
+Call.propTypes = {
+  funcRefreshList: PropTypes.func.isRequired,
 };
-
-InputText.defaultProps = {
-  value: '',
-  placeholder: '',
-  onChange: () => {},
-  enterFunc: () => {},
-};*/
 
 export default Call;

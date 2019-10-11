@@ -1,25 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Container} from './styles';
+import phone from '../../assets/img/icoPhone.png';
+import newCustomer from '../../assets/img/icoNew.png';
 
-
-const Call = ({}) => (
-  <Container/>
+const Call = ({id, type, isFirstContact}) => (
+  <Container>
+    <img src={isFirstContact? newCustomer :phone} alt="Ligação" />
+    <p>{id}</p>
+    <p>{type}</p>
+  </Container>
 );
 
-/*InputText.propTypes = {
+Call.propTypes = {
+  id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func,
-  enterFunc: PropTypes.func,
+  isFirstContact: PropTypes.bool.isRequired,
 };
-
-InputText.defaultProps = {
-  value: '',
-  placeholder: '',
-  onChange: () => {},
-  enterFunc: () => {},
-};*/
 
 export default Call;

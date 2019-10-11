@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
     font-family: Arial,Helvetica,sans-serif;
-    background-color: ${colors.lighter};
+    background-color: ${colors.secondary};
   }
 `;
 
